@@ -52,7 +52,7 @@ class QuizScreen extends HookWidget {
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color(0xFFD4418E), Color(0xFF0652C5)],
+          colors: [Color(0xFF0652C5), Color(0xFFD4418E)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -61,7 +61,7 @@ class QuizScreen extends HookWidget {
         backgroundColor: Colors.transparent,
         body: quizQuestions.when(
           data: (questions) => _buildBody(context, pageController, questions),
-          loading: () => const Center(child: CircularProgressIndicator()),
+          loading: () => const Center(child: CircularProgressIndicator(color: Colors.white,)),
           error: (error, _) => QuizError(
             message: error is Failure ? error.message : 'Something went wrong!',
           ),
@@ -170,7 +170,12 @@ class CustomButton extends StatelessWidget {
         height: 50.0,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.yellow[700],
+          // color: Colors.yellow[700],
+          gradient: const LinearGradient(
+            colors: [Color(0xFF0652C5), Color(0xFFD4418E)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
           boxShadow: boxShadow,
           borderRadius: BorderRadius.circular(25.0),
         ),
@@ -180,6 +185,7 @@ class CustomButton extends StatelessWidget {
           style: const TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.w600,
+            color: Colors.white,
           ),
         ),
       ),
@@ -222,10 +228,12 @@ class QuizResults extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 40.0),
+
         CustomButton(
           title: 'New Quiz',
           onTap: () {
             context.refresh(quizRepositoryProvider);
+
             context.read(quizControllerProvider).reset();
           },
         ),

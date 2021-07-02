@@ -36,6 +36,8 @@ class QuizController extends StateNotifier<QuizState> {
     );
   }
 
+
+
   void reset() {
     state = QuizState.initial();
   }
